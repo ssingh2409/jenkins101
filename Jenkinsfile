@@ -12,7 +12,7 @@ pipeline {
             steps {
                 echo "Building.."
                 sh '''
-                echo "Step 1 : build with Jenkinsfile"
+                echo "Step 1 : build with Jenkinsfile with github webhook"
                 '''
             }
         }
@@ -20,7 +20,7 @@ pipeline {
             steps {
                 echo "Testing.."
                 sh '''
-                echo "Step 2 : test with Jenkinsfile"
+                echo "Step 2 : test with Jenkinsfile with github webhook"
                 '''
             }
         }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 echo 'Deliver....'
                 sh '''
-                echo "doing delivery stuff with Jenkinsfile"
+                echo "doing delivery stuff with Jenkinsfile with github webhook"
                 '''
             }
         }
