@@ -3,7 +3,10 @@ pipeline {
         node {
             label 'docker-agent-local'
             }
-      }
+    }
+    triggers {
+        githubPush()
+    }
     stages {
         stage('Build') {
             steps {
