@@ -1,0 +1,31 @@
+Create a new agent 'python-agent'
+Steps -
+    - Go to Settings -> Nodes
+    - Click 'New Node'
+    - Provide name - python-agent
+    - Check 'Permanent' box
+    - Set 'Remote root directory' : /home/jenkins
+    - Set 'Launch method' : Launch agent by connecting it to the controller. (This ensures agent runs on the same machine as jenkins MASTER, which for this case is local machine)
+    
+Docker command -
+    docker run -d \
+        --name jenkins-python-worker \
+        --network jenkins \
+        --restart always \
+        ssingh2409/jenkins \
+        java -jar //usr/share/jenkins/agent.jar \
+        -url https://aeronautical-mixed-jamila.ngrok-free.dev/ \
+        -secret 8f904d049cf17141f82563a2891c512f1c56cdfdd19aee295f0b8fc694434ad8 \
+        -name python-agent \
+        -webSocket \
+        -noCertificateCheck
+
+    * name : name of the docker container
+    * network : ensure master and slave are on the same network
+    * ssingh2409/jenkins : python image I bulit to run python commands
+    * java -jar : this command ensures that master and slave communicate via webSocket using 8080. If not specified the comms   fallback to socket. Since I used ngrok for proxy, I had to specify the URL for ngrok. (I had to use ngrok as webhooks in Git only work with public URLs)
+        * url : ngrok url
+        * secret : can be found in jenkins UI
+        * name : the exact name as in UI
+        * noCertificateCheck : ensures communication can happen over https as well
+        
